@@ -22,6 +22,11 @@ app.factory('radarvectorHomePageService', function ($http) {
 			return $http.get('http://wildridge.net/api/news/topnews?n=' + count).then(function (result) {
 				return result.data.rows;
 			});
+		},
+		getTopNewsWithImages: function (count) {
+			return $http.get('http://wildridge.net/api/news/topnews_with_images?n=' + count).then(function (result) {
+				return result.data.rows;
+			});
 		}
 	};
 });
@@ -36,6 +41,8 @@ app.controller('RadarvectorHome', function ($scope, radarvectorHomePageService, 
 	$scope.latestVideo = radarvectorHomePageService.getLatestOneVideo();
 	// Top 5 News items
 	$scope.top5 = radarvectorHomePageService.getTopNews(5);
+	// Top 5 News items with Graphics
+	$scope.topNewsAndGraphics = radarvectorHomePageService.getTopNewsWithImages(5);
 
     // Set the hiro player's playlist with the latest video after getting the valid Video's Object
 	$scope.$watch('latestVideo', function (videoObj) {
